@@ -44,7 +44,7 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
 ### ENVIRONMENT & PATH CONFIGURATION
-export EDITOR="nvim"
+export EDITOR="micro"
 
 # SDKMAN & Java
 export SDKMAN_DIR="$HOME/.sdkman"

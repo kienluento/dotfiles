@@ -4,9 +4,3 @@
   ansible.builtin.file:
     path: "~/dev"
     state: directory
-
-- name: Clone dotfiles repository
-  ansible.builtin.git:
-    repo: "https://github.com/addyi/dotfiles.git"
-    dest: "~/dev/dotfiles"
-    update: false

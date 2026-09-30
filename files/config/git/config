@@ -1,8 +1,8 @@
 [user]
-	name = Adrian Renner (addyi)
-	email = addyi@users.noreply.github.com
+	name = Luen To (kto)
+	email = kienluen.to@rtm-it.de
 [core]
-	editor = nvim
+	editor = micro
 	autocrlf = input
 	pager = delta
 	excludesfile = ~/.config/git/ignore
