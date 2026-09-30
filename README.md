@@ -47,4 +47,4 @@ Set up ansible script with following tasks:
 - [x] Create `~/dev` folder and clone dotfile repository
 - [x] Copy or symlink dotfiles to correct locations
 - [ ] Create ssh key (or document how to create it)
-- [ ] Install [SDKMAN](docs/sdkman.md)
+- [x] Install [SDKMAN](docs/sdkman.md)

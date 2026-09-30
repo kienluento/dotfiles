@@ -18,3 +18,5 @@ homebrew_install_packages:
   - itsycal
   - jetbrains-toolbox
   - font-jetbrains-mono-nerd-font
+
+sdkman_java_version: "21.0.11-jbr"

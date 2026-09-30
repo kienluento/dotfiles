@@ -1,0 +1,45 @@
+---
+
+- name: Check if SDKMAN is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh"
+  register: sdkman_init_stat
+  check_mode: false
+
+- name: Install SDKMAN
+  ansible.builtin.shell:
+    cmd: "curl -fsSL 'https://get.sdkman.io?rcupdate=false' | bash"
+    executable: /bin/zsh
+  when: not sdkman_init_stat.stat.exists
+
+- name: Ensure SDKMAN auto-answer is enabled in config
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.sdkman/etc/config"
+    regexp: '^sdkman_auto_answer='
+    line: 'sdkman_auto_answer=true'
+    create: true
+    mode: '0644'
+
+- name: Check if Java {{ sdkman_java_version }} is installed in SDKMAN
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['env']['HOME'] }}/.sdkman/candidates/java/{{ sdkman_java_version }}"
+  register: sdkman_java_stat
+  check_mode: false
+
+- name: Install Java {{ sdkman_java_version }} via SDKMAN
+  ansible.builtin.shell:
+    cmd: "source {{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh && sdk install java {{ sdkman_java_version }}"
+    executable: /bin/zsh
+  when: not sdkman_java_stat.stat.exists
+
+- name: Check SDKMAN current Java version
+  ansible.builtin.stat:
+    path: "{{ ansible_facts['env']['HOME'] }}/.sdkman/candidates/java/current"
+  register: sdkman_current_java_stat
+  check_mode: false
+
+- name: Set Java {{ sdkman_java_version }} as default in SDKMAN
+  ansible.builtin.shell:
+    cmd: "source {{ ansible_facts['env']['HOME'] }}/.sdkman/bin/sdkman-init.sh && sdk default java {{ sdkman_java_version }}"
+    executable: /bin/zsh
+  when: not sdkman_current_java_stat.stat.exists or (sdkman_current_java_stat.stat.islnk is defined and sdkman_current_java_stat.stat.lnk_target is not search(sdkman_java_version))

@@ -25,9 +25,14 @@ source $ZSH/oh-my-zsh.sh
 ### ENVIRONMENT & PATH CONFIGURATION
 export EDITOR="nvim"
 
-# SDKMAN
+# SDKMAN & Java
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Ensure JAVA_HOME is set if SDKMAN candidate exists
+if [[ -z "$JAVA_HOME" && -d "$SDKMAN_DIR/candidates/java/current" ]]; then
+  export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
+fi
 
 # Android SDK
 export ANDROID_HOME="$HOME/Library/Android/sdk"

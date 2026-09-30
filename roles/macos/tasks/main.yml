@@ -7,3 +7,6 @@
 
 - name: Install dependencies via Homebrew
   ansible.builtin.include_tasks: homebrew.yml
+
+- name: Set up SDKMAN and Java
+  ansible.builtin.include_tasks: sdkman.yml
