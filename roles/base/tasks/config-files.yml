@@ -11,6 +11,12 @@
     dest: "~/.config/git/config"
     backup: true
 
+- name: Copy global gitignore to .config directory
+  ansible.builtin.copy:
+    src: "files/config/git/ignore"
+    dest: "~/.config/git/ignore"
+    backup: true
+
 - name: Ensure .config/nvim directory exists
   ansible.builtin.file:
     path: "~/.config/nvim"
