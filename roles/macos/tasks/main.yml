@@ -1,9 +1,9 @@
 ---
 
 - name: Check system is macOS
-  fail:
+  ansible.builtin.fail:
     msg: "These tasks can only be run on macOS!"
-  when: ansible_os_family != "Darwin"
+  when: ansible_facts['os_family'] != "Darwin"
 
 - name: Install dependencies via Homebrew
-  include_tasks: homebrew.yml
+  ansible.builtin.include_tasks: homebrew.yml

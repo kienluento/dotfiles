@@ -1,29 +1,32 @@
+---
+
 - name: Check Homebrew is installed
-  command: which brew
+  ansible.builtin.command: which brew
   register: homebrew_check
   failed_when:
     - homebrew_check.rc != 0
   ignore_errors: false
   changed_when: false # Don't mark this as a change
+  check_mode: false
 
 - name: Tap additional Homebrew repositories
-  homebrew_tap:
+  community.general.homebrew_tap:
     name: "{{ item }}"
-  with_items: "{{ homebrew_taps }}"
-  when: homebrew_check.rc == 0
-  ignore_errors: true
+  loop: "{{ homebrew_taps }}"
+  when:
+    - homebrew_check.rc == 0
+    - homebrew_taps | length > 0
 
-- name: Update, upgrade Homebrew packages
-  homebrew:
+- name: Update and upgrade Homebrew packages
+  community.general.homebrew:
     update_homebrew: true
     upgrade_all: true
   when: homebrew_check.rc == 0
-  ignore_errors: true
 
 - name: Install packages with Homebrew
-  homebrew:
-    name: "{{ item }}"
+  community.general.homebrew:
+    name: "{{ homebrew_install_packages }}"
     state: present
-  with_items: "{{ homebrew_install_packages }}"
-  when: homebrew_check.rc == 0
-  ignore_errors: true
+  when:
+    - homebrew_check.rc == 0
+    - homebrew_install_packages | length > 0
