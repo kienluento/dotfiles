@@ -21,3 +21,11 @@
 	log = true
 [rerere]
     enabled = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
