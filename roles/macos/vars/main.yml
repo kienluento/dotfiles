@@ -1,5 +1,4 @@
-homebrew_taps:
-  - homebrew/cask-fonts # https://www.nerdfonts.com/
+homebrew_taps: []
 
 homebrew_install_packages:
   - git
@@ -13,8 +12,9 @@ homebrew_install_packages:
   - htop
   - btop
   - python3
-  - alacritty
+  - scrcpy
+  - ghostty
   - rectangle
+  - itsycal
   - jetbrains-toolbox
-  - firefox
-  # - TODO google-chrome
+  - font-jetbrains-mono-nerd-font

@@ -27,17 +27,3 @@
   with_items: "{{ homebrew_install_packages }}"
   when: homebrew_check.rc == 0
   ignore_errors: true
-
-- name: Search for nerd fonts using brew
-  shell: brew search '/font-.*-nerd-font/'
-  register: brew_nerd_font_search_output
-  when: homebrew_check.rc == 0
-  changed_when: false
-
-- name: Install found nerd fonts
-  homebrew:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ brew_nerd_font_search_output.stdout_lines }}"
-  when: homebrew_check.rc == 0
-  ignore_errors: true
