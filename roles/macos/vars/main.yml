@@ -6,6 +6,7 @@ homebrew_install_packages:
   - fzf
   - fd
   - nvim
+  - micro
   - tmux
   - most
   - bat

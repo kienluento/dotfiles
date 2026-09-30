@@ -85,6 +85,8 @@ alias vim="nvim"
 alias less="most"
 alias more="most"
 
+alias nano="micro"
+
 alias l="eza -la --git --header --group-directories-first"
 alias ll="eza -la --git --header --group-directories-first"
 alias tree="eza --tree --level=2 --git --header --group-directories-first"

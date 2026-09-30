@@ -1,0 +1,15 @@
+{
+  "autoindent": true,
+  "clipboard": "external",
+  "colorscheme": "simple",
+  "diffgutter": true,
+  "infobar": true,
+  "keymenu": true,
+  "mouse": true,
+  "ruler": true,
+  "savecursor": true,
+  "saveundo": true,
+  "scrollbar": true,
+  "tabsize": 4,
+  "tabstospaces": true
+}
