@@ -16,11 +16,32 @@ zstyle ':omz:update' mode auto # update automatically without asking
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent lazy yes
 
+# Case-insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-prompt ssh-agent fzf gradle aliases archlinux zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  git
+  git-prompt
+  ssh-agent
+  fzf
+  gradle
+  aliases
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
+
+### HISTORY CONFIGURATION
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
 
 ### ENVIRONMENT & PATH CONFIGURATION
 export EDITOR="nvim"
@@ -48,6 +69,13 @@ path=(
   $path
 )
 export PATH
+
+# FZF Search Engine (uses fd for maximum speed and gitignore respect)
+if command -v fd >/dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --exclude .git'
+fi
 
 ### ALIASES
 alias python="python3"
