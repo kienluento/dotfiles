@@ -50,6 +50,12 @@
     dest: "~/.config/tmux/tmux.conf"
     backup: true
 
+- name: Ensure Tmux Plugin Manager (TPM) is installed
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "~/.tmux/plugins/tpm"
+    update: true
+
 - name: Ensure .config/ghostty directory exists
   ansible.builtin.file:
     path: "~/.config/ghostty"
